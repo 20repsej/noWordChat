@@ -5,10 +5,8 @@ var fs = require('fs');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-    let testobj = {'time':'2020', 'text':'mitt fina meddelande att skicka'};
-    fs.appendFile('chat.json', ',\n' + JSON.stringify(testobj), function upd() {
-        console.log("TODO error if error");
-    });
+
+
     res.render('index', { title: 'Get Chat' });
 });
 
@@ -17,6 +15,10 @@ function isNotWord(message) {
     console.log(messageArr);
     let cleanMessageArr = messageArr.map(m => m.replace(/[^\W\s]/gi, ''));
 
+    let testobj = {'time':'2020', 'text':'mitt fina meddelande att skicka'};
+    fs.appendFile('chat.json', ',\n' + JSON.stringify(testobj), function upd() {
+        console.log("TODO error if error");
+    });
 }
 
 module.exports = router;
