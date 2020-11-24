@@ -1,12 +1,23 @@
 var express = require('express');
 var router = express.Router();
+var bodyParser = require('body-parser')
 var fs = require('fs');
 var chat = require('./chat.json');
 
+// Use bodyParser for POST requests
+router.use(bodyParser.urlencoded({ extended: false }))
 
-/* GET home page. */
-router.get('/get', function (req, res, next) {
-    
+// Receive POST request from client
+router.post('/post', function (req, res){
+    let username = req.body.messages[0].username;
+    let message = req.body.message;
+
+    console.log("Username: " + username);
+});
+
+// Send old messages to client
+router.get('/getFirst', function (req, res, next) {
+
 
     res.send(chat);
 });
@@ -29,7 +40,7 @@ function isNotWord(message) {
     console.log(messageArr);
     let cleanMessageArr = messageArr.map(m => m.replace(/[^\W\s]/gi, ''));
 
-    let testobj = {'time':'2020', 'text':'mitt fina meddelande att skicka'};
+    let testobj = { 'time': '2020', 'text': 'mitt fina meddelande att skicka' };
     fs.appendFile('chat.json', ',\n' + JSON.stringify(testobj), function upd() {
         console.log("TODO error if error");
     });

@@ -21,7 +21,7 @@ namespace console
             System.Console.WriteLine("Client starting");
 
             WebClient wc = new WebClient();
-            string json = wc.DownloadString("http://localhost:3000/chat/get");
+            string json = wc.DownloadString("http://localhost:3000/chat/getFirst");
 
             Messages readMessages = JsonConvert.DeserializeObject<Messages>(json);
             for (int i = 0; i < readMessages.messages.Length; i++)
@@ -29,6 +29,8 @@ namespace console
                 System.Console.WriteLine(readMessages.messages[i].username);
                 System.Console.WriteLine(readMessages.messages[i].message);
             }
+            wc.Headers[HttpRequestHeader.ContentType] = "application/json";
+            wc.UploadString(new Uri("http://localhost:3000/chat/post"), "POST", json);
         }
     }
 }
