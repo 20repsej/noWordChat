@@ -57,11 +57,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/jesper/chatprogram/noWordChat/client/console/console.csproj",
+      "projectUniqueName": "/home/jesper/code/noWordChat/client/console/console.csproj",
       "projectName": "console",
-      "projectPath": "/home/jesper/chatprogram/noWordChat/client/console/console.csproj",
+      "projectPath": "/home/jesper/code/noWordChat/client/console/console.csproj",
       "packagesPath": "/home/jesper/.nuget/packages/",
-      "outputPath": "/home/jesper/chatprogram/noWordChat/client/console/obj/",
+      "outputPath": "/home/jesper/code/noWordChat/client/console/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/jesper/.nuget/NuGet/NuGet.Config"

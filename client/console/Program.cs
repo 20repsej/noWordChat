@@ -7,26 +7,27 @@ namespace console
     class Program
     {
 
-        public class message
+        public class Message
         {
             public string username;
-            public string userMessage;
+            public string message;
         }
         public class Messages
         {
-            public Messages[] messages;
+            public Message[] messages;
         }
         static void Main(string[] args)
         {
+            System.Console.WriteLine("Client starting");
+
             WebClient wc = new WebClient();
-            string json = wc.DownloadString("http://10.254.144.84:3000/chat/get");
+            string json = wc.DownloadString("http://localhost:3000/chat/get");
 
-            Messages allMessages = JsonConvert.DeserializeObject<Messages>(json);
-
-            for (int i = 0; i < allMessages.messages.Length; i++)
-                System.Console.WriteLine("Data" + allMessages.messages[i]);
+            Messages readMessages = JsonConvert.DeserializeObject<Messages>(json);
+            for (int i = 0; i < readMessages.messages.Length; i++)
             {
-                
+                System.Console.WriteLine(readMessages.messages[i].username);
+                System.Console.WriteLine(readMessages.messages[i].message);
             }
         }
     }
