@@ -9,7 +9,7 @@ router.use(bodyParser.urlencoded({ extended: false }))
 
 // Receive POST request from client
 router.post('/post', function (req, res){
-    let username = req.body.messages[0].username;
+    let username = req.body.messages;
     let message = req.body.message;
 
     console.log("Username: " + username);
