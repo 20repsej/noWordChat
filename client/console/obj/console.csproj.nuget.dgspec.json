@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/jesper/noWordChat/client/console/console.csproj": {}
+    "/home/jesper/chatprogram/noWordChat/client/console/console.csproj": {}
   },
   "projects": {
-    "/home/jesper/noWordChat/client/console/console.csproj": {
+    "/home/jesper/chatprogram/noWordChat/client/console/console.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/jesper/noWordChat/client/console/console.csproj",
+        "projectUniqueName": "/home/jesper/chatprogram/noWordChat/client/console/console.csproj",
         "projectName": "console",
-        "projectPath": "/home/jesper/noWordChat/client/console/console.csproj",
+        "projectPath": "/home/jesper/chatprogram/noWordChat/client/console/console.csproj",
         "packagesPath": "/home/jesper/.nuget/packages/",
-        "outputPath": "/home/jesper/noWordChat/client/console/obj/",
+        "outputPath": "/home/jesper/chatprogram/noWordChat/client/console/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/jesper/.nuget/NuGet/NuGet.Config"
@@ -35,6 +35,12 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.3, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
