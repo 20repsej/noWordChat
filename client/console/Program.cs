@@ -29,6 +29,7 @@ namespace console
                 System.Console.WriteLine(readMessages.messages[i].username);
                 System.Console.WriteLine(readMessages.messages[i].message);
             }
+            // Send test message to server
             wc.Headers[HttpRequestHeader.ContentType] = "application/json";
             wc.UploadString(new Uri("http://localhost:3000/chat/post"), "POST", json);
         }
