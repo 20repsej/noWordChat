@@ -18,7 +18,7 @@ namespace console
         }
         static void Main(string[] args)
         {
-
+/*
             System.Console.WriteLine("Starting Client");
 
             WebClient cli = new WebClient();
@@ -53,8 +53,7 @@ namespace console
                 cli.Headers[HttpRequestHeader.ContentType] = "application/json";
                 cli.UploadString(new Uri("http://localhost:3000/chat/post"), "POST", newMessage);
             };
-
-            /* Working demo of GET and POST data
+*/
             System.Console.WriteLine("Client starting");
 
             WebClient wc = new WebClient();
@@ -69,7 +68,6 @@ namespace console
             // Send test message to server
             wc.Headers[HttpRequestHeader.ContentType] = "application/json";
             wc.UploadString(new Uri("http://localhost:3000/chat/post"), "POST", json);
-            */
         }
     }
 }
