@@ -52,19 +52,23 @@
     ]
   },
   "packageFolders": {
-    "/home/jesper/.nuget/packages/": {}
+    "C:\\Users\\18wenaxe\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/jesper/code/noWordChat/client/console/console.csproj",
+      "projectUniqueName": "C:\\Users\\18wenaxe\\Desktop\\y mapp\\noWordChat\\client\\console\\console.csproj",
       "projectName": "console",
-      "projectPath": "/home/jesper/code/noWordChat/client/console/console.csproj",
-      "packagesPath": "/home/jesper/.nuget/packages/",
-      "outputPath": "/home/jesper/code/noWordChat/client/console/obj/",
+      "projectPath": "C:\\Users\\18wenaxe\\Desktop\\y mapp\\noWordChat\\client\\console\\console.csproj",
+      "packagesPath": "C:\\Users\\18wenaxe\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\18wenaxe\\Desktop\\y mapp\\noWordChat\\client\\console\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "/home/jesper/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\18wenaxe\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -101,18 +105,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[3.1.8, 3.1.8]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.108/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.404\\RuntimeIdentifierGraph.json"
       }
     }
   }

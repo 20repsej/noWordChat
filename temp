@@ -2,27 +2,28 @@ var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser')
 var fs = require('fs');
-var chat = require('./chat.json');
+
+
+let chat = [];
+
+
+fs.readFile("chat", function (err, data) {
+    if (err !== null) {
+      console.log("Fel fel fel" + err);
+    } else {
+      chat = JSON.parse(data);
+    }
+  })
 
 // Use bodyParser for POST requests
 router.use(bodyParser.urlencoded({ extended: false }))
 
 // Receive POST request from client
 router.post('/post', function (req, res){
-
-    let json = req.body;
-    console.log(json);
-
-    let username = json.messages.username;
-    let message = json.messages.message;
-
-    chat.messages.push(json.messages[0].username);
-
-    fs.writeFile("chat.json", chat, x => x);
+    let username = req.body.messages;
+    let message = req.body.message;
 
     console.log("Username: " + username);
-
-    res.send();
 });
 
 // Send old messages to client
@@ -36,12 +37,15 @@ router.get('/set', function (req, res, next) {
     let username = req.query.username;
     let messageText = req.query.messageText;
 
-    let message = JSON.parse(username, messageText);
-
+    let message = {username: username, messageText: messageText};
+    
     chat.messages.push(message);
+    fs.writeFile("chat", chat, x => x);
+    
+    res.send(chat);
 
-    res.render('index', { title: 'Get Chat' });
 });
+
 
 
 
