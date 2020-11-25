@@ -18,7 +18,8 @@ namespace console
         }
         static void Main(string[] args)
         {
-/*
+            /*
+
             System.Console.WriteLine("Starting Client");
 
             WebClient cli = new WebClient();
@@ -53,9 +54,12 @@ namespace console
                 cli.Headers[HttpRequestHeader.ContentType] = "application/json";
                 cli.UploadString(new Uri("http://localhost:3000/chat/post"), "POST", newMessage);
             };
-*/
-            System.Console.WriteLine("Client starting");
+            */
 
+            // Working demo of GET and POST data
+            System.Console.WriteLine("Client starting");
+            
+            System.Console.WriteLine("Getting data from server...");
             WebClient wc = new WebClient();
             string json = wc.DownloadString("http://localhost:3000/chat/getFirst");
 
@@ -66,8 +70,10 @@ namespace console
                 System.Console.WriteLine(readMessages.messages[i].message);
             }
             // Send test message to server
+            System.Console.WriteLine("Sending data to server... ");
             wc.Headers[HttpRequestHeader.ContentType] = "application/json";
             wc.UploadString(new Uri("http://localhost:3000/chat/post"), "POST", json);
+            
         }
     }
 }
