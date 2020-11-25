@@ -58,11 +58,19 @@
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
+      "projectUniqueName": "/home/jesper/realchat/noWordChat/client/console/console.csproj",
+      "projectName": "console",
+      "projectPath": "/home/jesper/realchat/noWordChat/client/console/console.csproj",
+      "packagesPath": "/home/jesper/.nuget/packages/",
+      "outputPath": "/home/jesper/realchat/noWordChat/client/console/obj/",
+=======
       "projectUniqueName": "C:\\Users\\18wenaxe\\Desktop\\y mapp\\noWordChat\\client\\console\\console.csproj",
       "projectName": "console",
       "projectPath": "C:\\Users\\18wenaxe\\Desktop\\y mapp\\noWordChat\\client\\console\\console.csproj",
       "packagesPath": "C:\\Users\\18wenaxe\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\18wenaxe\\Desktop\\y mapp\\noWordChat\\client\\console\\obj\\",
+>>>>>>> cf035fc0347394bf645d4a08cf2c9eb1e64a2bac
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
