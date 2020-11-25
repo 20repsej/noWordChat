@@ -18,8 +18,6 @@ namespace console
         }
         static void Main(string[] args)
         {
-            /*
-
             System.Console.WriteLine("Starting Client");
 
             WebClient cli = new WebClient();
@@ -36,26 +34,26 @@ namespace console
 
             for (int i = 0; i < oldMessages.messages.Length; i++)
             {
-                System.Console.WriteLine($"{oldMessages.messages[i].username}: {oldMessages.messages[i].message}");
+                System.Console.WriteLine($"{oldMessages.messages[i].username}: {oldMessages.messages[i].messageText}");
             }
 
             while (true)
             {
                 string newMessage = System.Console.ReadLine();
-                send(oldMessagesJson, user);
+                send(newMessage, user);
             }
 
 
             void send(string newMessage, string user)
             {
-
-                newMessage = JsonConvert.SerializeObject(newMessage);
-                System.Console.WriteLine(newMessage);
+                WebClient wc = new WebClient();
+                toSend = "{ username:'" + user + "', messageText:'" + newMessage + "' }"
+                newMessage = JsonConvert.SerializeObject();
+                System.Console.WriteLine("Sending: " + toSend);
                 cli.Headers[HttpRequestHeader.ContentType] = "application/json";
-                cli.UploadString(new Uri("http://localhost:3000/chat/post"), "POST", newMessage);
+                cli.UploadString(new Uri("http://localhost:3000/chat/post"), "POST", toSend);
             };
-            */
-
+            /*
             // Working demo of GET and POST data
             System.Console.WriteLine("Client starting");
             
@@ -73,7 +71,7 @@ namespace console
             System.Console.WriteLine("Sending data to server... ");
             wc.Headers[HttpRequestHeader.ContentType] = "application/json";
             wc.UploadString(new Uri("http://localhost:3000/chat/post"), "POST", json);
-            
+            */
         }
     }
 }
