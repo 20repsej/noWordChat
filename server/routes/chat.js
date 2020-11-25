@@ -10,19 +10,21 @@ router.use(bodyParser.urlencoded({ extended: false }))
 // Receive POST request from client
 router.post('/post', function (req, res){
 
-    let json = req.body;
-    console.log(json);
 
-    let username = json.messages.username;
-    let message = json.messages.message;
+    // expected format: { username: '20repsej', messageText: 'This is my message' }
+    let message = req.body;
 
-    chat.messages.push(json.messages[0].username);
+    // log recieved data for debugging
+    console.log("This is what I recieved: " + message);
+    console.log("Username: " + message.username);
+    console.log("Message text: " + message.messageText);
+
+
+    chat.messages.push(message);
 
     fs.writeFile("chat.json", chat, x => x);
 
-    console.log("Username: " + username);
-
-    res.send();
+    res.send(); // let the client move on with life
 });
 
 // Send old messages to client
