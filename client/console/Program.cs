@@ -53,7 +53,15 @@ namespace console
                 // Send test message to server
                 System.Console.WriteLine("Sending data to server... ");
                 cli.Headers[HttpRequestHeader.ContentType] = "application/json";
+                try
+                {
                 cli.UploadString(new Uri("http://localhost:3000/chat/post"), "POST", jsonSend);
+                }
+                catch (WebException e)
+                {
+                    
+                    throw e;
+                }
             }
 
 

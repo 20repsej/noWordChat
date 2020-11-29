@@ -20,12 +20,20 @@ router.post('/post', function (req, res){
     console.log("Username: " + message.username);
     console.log("Message text: " + message.messageText);
 
-
+    console.log(chat.messages);
     chat.messages.push(message);
+    console.log(chat);
+    newChatFile = JSON.stringify(chat);
+    console.log(newChatFile);
 
-    fs.writeFile("chat.json", chat, x => x);
-
-    res.send(); // let the client move on with life
+    //fs.writeFile("chat2.json", newChatFile);
+    fs.writeFile(chat2.json, newChatFile, (err) => {
+        if (err) throw err;
+    
+        console.log("The file was succesfully saved!");
+    });
+    console.log("Debuging Things");
+    res.send("Test"); // let the client move on with life
 });
 
 // Send old messages to client
