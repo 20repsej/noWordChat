@@ -1,37 +1,20 @@
 {
   "format": 1,
   "restore": {
-<<<<<<< HEAD
-    "/home/jesper/realchat/noWordChat/client/console/console.csproj": {}
+    "/home/jesper/code/fixshit/noWordChat/client/console/console.csproj": {}
   },
   "projects": {
-    "/home/jesper/realchat/noWordChat/client/console/console.csproj": {
+    "/home/jesper/code/fixshit/noWordChat/client/console/console.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/jesper/realchat/noWordChat/client/console/console.csproj",
+        "projectUniqueName": "/home/jesper/code/fixshit/noWordChat/client/console/console.csproj",
         "projectName": "console",
-        "projectPath": "/home/jesper/realchat/noWordChat/client/console/console.csproj",
+        "projectPath": "/home/jesper/code/fixshit/noWordChat/client/console/console.csproj",
         "packagesPath": "/home/jesper/.nuget/packages/",
-        "outputPath": "/home/jesper/realchat/noWordChat/client/console/obj/",
-=======
-    "C:\\Users\\18wenaxe\\Desktop\\y mapp\\noWordChat\\client\\console\\console.csproj": {}
-  },
-  "projects": {
-    "C:\\Users\\18wenaxe\\Desktop\\y mapp\\noWordChat\\client\\console\\console.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Users\\18wenaxe\\Desktop\\y mapp\\noWordChat\\client\\console\\console.csproj",
-        "projectName": "console",
-        "projectPath": "C:\\Users\\18wenaxe\\Desktop\\y mapp\\noWordChat\\client\\console\\console.csproj",
-        "packagesPath": "C:\\Users\\18wenaxe\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\18wenaxe\\Desktop\\y mapp\\noWordChat\\client\\console\\obj\\",
->>>>>>> cf035fc0347394bf645d4a08cf2c9eb1e64a2bac
+        "outputPath": "/home/jesper/code/fixshit/noWordChat/client/console/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\18wenaxe\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/home/jesper/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -68,12 +51,18 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.1.8, 3.1.8]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.404\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.108/RuntimeIdentifierGraph.json"
         }
       }
     }
