@@ -16,6 +16,11 @@ namespace console
         {
             public Message[] messages;
         }
+        // Only used for testing/example
+        public class UserMessage {
+            public string username;
+            public string messageText;
+        }
         static void Main(string[] args)
         {
             System.Console.WriteLine("Starting Client");
@@ -39,21 +44,22 @@ namespace console
 
             while (true)
             {
-                string newMessage = System.Console.ReadLine();
-                send(newMessage, user);
+                System.Console.Write("Message: ");
+                string messageInput = System.Console.ReadLine();
+                Message message = new Message();
+                message.messageText = messageInput;
+                message.username = user;
+                string jsonSend = JsonConvert.SerializeObject(message);
+                // Send test message to server
+                System.Console.WriteLine("Sending data to server... ");
+                cli.Headers[HttpRequestHeader.ContentType] = "application/json";
+                cli.UploadString(new Uri("http://localhost:3000/chat/post"), "POST", jsonSend);
             }
 
 
-            void send(string newMessage, string user)
-            {
-                WebClient wc = new WebClient();
-                string toSend = "{ username:'" + user + "', messageText:'" + newMessage + "' }";
-                System.Console.WriteLine("Sending: " + toSend);
-                cli.Headers[HttpRequestHeader.ContentType] = "application/json";
-                cli.UploadString(new Uri("http://localhost:3000/chat/post"), "POST", toSend);
-            };
             /*
             // Working demo of GET and POST data
+            // Can send the test string from userMessage
             System.Console.WriteLine("Client starting");
             
             System.Console.WriteLine("Getting data from server...");
@@ -64,12 +70,16 @@ namespace console
             for (int i = 0; i < readMessages.messages.Length; i++)
             {
                 System.Console.WriteLine(readMessages.messages[i].username);
-                System.Console.WriteLine(readMessages.messages[i].message);
+                System.Console.WriteLine(readMessages.messages[i].messageText);
             }
+            UserMessage userMessage = new UserMessage();
+            userMessage.username = "20repsej";
+            userMessage.messageText = "This is an example message";
+            string jsonSend = JsonConvert.SerializeObject(userMessage);
             // Send test message to server
             System.Console.WriteLine("Sending data to server... ");
             wc.Headers[HttpRequestHeader.ContentType] = "application/json";
-            wc.UploadString(new Uri("http://localhost:3000/chat/post"), "POST", json);
+            wc.UploadString(new Uri("http://localhost:3000/chat/post"), "POST", jsonSend);
             */
         }
     }
