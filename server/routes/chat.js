@@ -5,7 +5,8 @@ var fs = require('fs');
 var chat = require('./chat.json');
 
 // Use bodyParser for POST requests
-router.use(bodyParser.urlencoded({ extended: false }))
+router.use(bodyParser.urlencoded({extended: false}));
+router.use(bodyParser.json());
 
 // Receive POST request from client
 router.post('/post', function (req, res){
@@ -29,7 +30,6 @@ router.post('/post', function (req, res){
 
 // Send old messages to client
 router.get('/getFirst', function (req, res, next) {
-
 
     res.send(chat);
 });
