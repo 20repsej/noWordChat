@@ -10,7 +10,7 @@ namespace console
         public class Message
         {
             public string username;
-            public string message;
+            public string messageText;
         }
         public class Messages
         {
@@ -47,8 +47,7 @@ namespace console
             void send(string newMessage, string user)
             {
                 WebClient wc = new WebClient();
-                toSend = "{ username:'" + user + "', messageText:'" + newMessage + "' }"
-                newMessage = JsonConvert.SerializeObject();
+                string toSend = "{ username:'" + user + "', messageText:'" + newMessage + "' }";
                 System.Console.WriteLine("Sending: " + toSend);
                 cli.Headers[HttpRequestHeader.ContentType] = "application/json";
                 cli.UploadString(new Uri("http://localhost:3000/chat/post"), "POST", toSend);
