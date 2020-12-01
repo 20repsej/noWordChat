@@ -26,14 +26,18 @@ router.post('/post', function (req, res){
     newChatFile = JSON.stringify(chat);
     console.log(newChatFile);
 
-    //fs.writeFile("chat2.json", newChatFile);
-    fs.writeFile(chat2.json, newChatFile, (err) => {
-        if (err) throw err;
-    
-        console.log("The file was succesfully saved!");
-    });
-    console.log("Debuging Things");
-    res.send("Test"); // let the client move on with life
+    try {
+        fs.writeFile("chatlog.json", newChatFile, (err) => {
+            if (err) throw err;
+        
+            console.log("The file was succesfully saved!");
+        });
+    } catch (e) {
+        console.log("Could not save file: " + e);
+    }
+
+
+    res.end(); // let the client move on with life
 });
 
 // Send old messages to client
