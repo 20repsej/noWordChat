@@ -57,11 +57,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/jesper/code/fixshit/noWordChat/client/console/console.csproj",
+      "projectUniqueName": "/home/jesper/programmering/mycketfin/noWordChat/client/console/console.csproj",
       "projectName": "console",
-      "projectPath": "/home/jesper/code/fixshit/noWordChat/client/console/console.csproj",
+      "projectPath": "/home/jesper/programmering/mycketfin/noWordChat/client/console/console.csproj",
       "packagesPath": "/home/jesper/.nuget/packages/",
-      "outputPath": "/home/jesper/code/fixshit/noWordChat/client/console/obj/",
+      "outputPath": "/home/jesper/programmering/mycketfin/noWordChat/client/console/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/jesper/.nuget/NuGet/NuGet.Config"

@@ -16,9 +16,12 @@ router.post('/post', function (req, res){
     let message = req.body;
 
     // log recieved data for debugging
-    console.log("This is what I recieved: " + message);
     console.log("Username: " + message.username);
     console.log("Message text: " + message.messageText);
+
+    // Adds time to message
+    let time = Date.now();
+    message.time = time;
 
     console.log(chat.messages);
     chat.messages.push(message);
@@ -27,7 +30,7 @@ router.post('/post', function (req, res){
     console.log(newChatFile);
 
     try {
-        fs.writeFile("chatlog.json", newChatFile, (err) => {
+        fs.writeFile("./chat.json", newChatFile, (err) => {
             if (err) throw err;
         
             console.log("The file was succesfully saved!");
@@ -42,8 +45,20 @@ router.post('/post', function (req, res){
 
 // Send old messages to client
 router.get('/getFirst', function (req, res, next) {
+    let messagesToSend;
+    if (chat.messages.length < 10) {
+        messagesToSend = 0;
+    }
+    else{
+        messagesToSend = chat.messages.length - 10;
+    }
 
-    res.send(chat);
+    let tenLast = chat.messages.slice(messagesToSend);
+    let messages = {messages:tenLast};
+    let tosend = JSON.stringify(messages);
+
+    console.log(tosend);
+    res.send(tosend);
 });
 
 router.get('/set', function (req, res, next) {
