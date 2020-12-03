@@ -2,11 +2,15 @@
     "messages": [
         {
             "username": "20repsej",
-            "message": "This is my message"
+            "messageText": "This is my message"
         },
         {
             "username": "Axelmannen",
-            "message": "This is another message"
+            "messageText": "This is another message"
+        },
+        {
+            "username": "Test",
+            "messageText": "Test Testson"
         }
     ]
 }

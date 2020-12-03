@@ -5,11 +5,11 @@ var fs = require('fs');
 var chat = require('./chat.json');
 
 // Use bodyParser for POST requests
-router.use(bodyParser.urlencoded({extended: false}));
+router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
 
 // Receive POST request from client
-router.post('/post', function (req, res){
+router.post('/post', function (req, res) {
 
 
     // expected format: { username: '20repsej', messageText: 'This is my message' }
@@ -29,7 +29,7 @@ router.post('/post', function (req, res){
     //fs.writeFile("chat2.json", newChatFile);
     fs.writeFile(chat2.json, newChatFile, (err) => {
         if (err) throw err;
-    
+
         console.log("The file was succesfully saved!");
     });
     console.log("Debuging Things");
@@ -38,8 +38,11 @@ router.post('/post', function (req, res){
 
 // Send old messages to client
 router.get('/getFirst', function (req, res, next) {
+    console.log(chat.messages.length());
+    let changeToBetterName = chat.messages.splice(chat.messages.length() - 2);
 
-    res.send(chat);
+    console.log(changeToBetterName);
+    res.send(changeToBetterName);
 });
 
 router.get('/set', function (req, res, next) {

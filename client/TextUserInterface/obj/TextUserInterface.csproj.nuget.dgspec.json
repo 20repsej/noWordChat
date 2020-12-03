@@ -1,0 +1,72 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/jesper/code/fixshit/noWordChat/client/TextUserInterface/TextUserInterface.csproj": {}
+  },
+  "projects": {
+    "/home/jesper/code/fixshit/noWordChat/client/TextUserInterface/TextUserInterface.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/jesper/code/fixshit/noWordChat/client/TextUserInterface/TextUserInterface.csproj",
+        "projectName": "TextUserInterface",
+        "projectPath": "/home/jesper/code/fixshit/noWordChat/client/TextUserInterface/TextUserInterface.csproj",
+        "packagesPath": "/home/jesper/.nuget/packages/",
+        "outputPath": "/home/jesper/code/fixshit/noWordChat/client/TextUserInterface/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/jesper/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp5.0.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "netcoreapp5.0.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "netcoreapp5.0.0",
+          "dependencies": {
+            "Terminal.Gui": {
+              "target": "Package",
+              "version": "[0.81.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[5.0.0, 5.0.0]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.100/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

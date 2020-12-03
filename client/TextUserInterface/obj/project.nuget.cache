@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "Wy1DTvjs2GvUQ1MfjaAgKGhANueGdzcQ3eF1i6Q5GE84p1Gqhzjr5nlzP1mQ3PhBQF8cZid3vznOYSNBHUGR8A==",
+  "success": true,
+  "projectFilePath": "/home/jesper/code/fixshit/noWordChat/client/TextUserInterface/TextUserInterface.csproj",
+  "expectedPackageFiles": [
+    "/home/jesper/.nuget/packages/nstack.core/0.14.0/nstack.core.0.14.0.nupkg.sha512",
+    "/home/jesper/.nuget/packages/terminal.gui/0.81.0/terminal.gui.0.81.0.nupkg.sha512",
+    "/home/jesper/.nuget/packages/microsoft.aspnetcore.app.ref/5.0.0/microsoft.aspnetcore.app.ref.5.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
