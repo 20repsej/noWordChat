@@ -1,16 +1,1 @@
-{
-    "messages": [
-        {
-            "username": "20repsej",
-            "messageText": "This is my message"
-        },
-        {
-            "username": "Axelmannen",
-            "messageText": "This is another message"
-        },
-        {
-            "username": "Test",
-            "messageText": "Test Testson"
-        }
-    ]
-}
+{"messages":[{"username":"20repsej","message":"This is my message"},{"username":"Axelmannen","message":"This is another message"},{"username":"jesper","messageText":"Mitt fina meddelande"},{"username":"jesper","messageText":"saker"},{"username":"jesper","messageText":"saker"},{"username":"jesper","messageText":"saker"},{"username":"jesper","messageText":"saker"},{"username":"jesper","messageText":"skaker"}]}

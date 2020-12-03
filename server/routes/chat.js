@@ -16,9 +16,12 @@ router.post('/post', function (req, res) {
     let message = req.body;
 
     // log recieved data for debugging
-    console.log("This is what I recieved: " + message);
     console.log("Username: " + message.username);
     console.log("Message text: " + message.messageText);
+
+    // Adds time to message
+    let time = Date.now();
+    message.time = time;
 
     console.log(chat.messages);
     chat.messages.push(message);
@@ -26,23 +29,36 @@ router.post('/post', function (req, res) {
     newChatFile = JSON.stringify(chat);
     console.log(newChatFile);
 
-    //fs.writeFile("chat2.json", newChatFile);
-    fs.writeFile(chat2.json, newChatFile, (err) => {
-        if (err) throw err;
+    try {
+        fs.writeFile("./chat.json", newChatFile, (err) => {
+            if (err) throw err;
+        
+            console.log("The file was succesfully saved!");
+        });
+    } catch (e) {
+        console.log("Could not save file: " + e);
+    }
 
-        console.log("The file was succesfully saved!");
-    });
-    console.log("Debuging Things");
-    res.send("Test"); // let the client move on with life
+
+    res.end(); // let the client move on with life
 });
 
 // Send old messages to client
 router.get('/getFirst', function (req, res, next) {
-    console.log(chat.messages.length());
-    let changeToBetterName = chat.messages.splice(chat.messages.length() - 2);
+    let messagesToSend;
+    if (chat.messages.length < 10) {
+        messagesToSend = 0;
+    }
+    else{
+        messagesToSend = chat.messages.length - 10;
+    }
 
-    console.log(changeToBetterName);
-    res.send(changeToBetterName);
+    let tenLast = chat.messages.slice(messagesToSend);
+    let messages = {messages:tenLast};
+    let tosend = JSON.stringify(messages);
+
+    console.log(tosend);
+    res.send(tosend);
 });
 
 router.get('/set', function (req, res, next) {

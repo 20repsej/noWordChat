@@ -11,6 +11,7 @@ namespace console
         {
             public string username;
             public string messageText;
+            public long time;
         }
         public class Messages
         {
@@ -39,7 +40,9 @@ namespace console
 
             for (int i = 0; i < oldMessages.messages.Length; i++)
             {
-                System.Console.WriteLine($"{oldMessages.messages[i].username}: {oldMessages.messages[i].messageText}");
+                DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(oldMessages.messages[i].time);
+
+                System.Console.WriteLine($"{dateTimeOffset: oldMessages.messages[i].username}: {oldMessages.messages[i].messageText}");
             }
 
             while (true)
