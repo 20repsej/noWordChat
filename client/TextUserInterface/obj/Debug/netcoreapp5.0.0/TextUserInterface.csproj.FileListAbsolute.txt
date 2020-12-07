@@ -17,3 +17,4 @@
 /home/jesper/code/fixshit/noWordChat/client/TextUserInterface/obj/Debug/netcoreapp5.0.0/ref/TextUserInterface.dll
 /home/jesper/code/fixshit/noWordChat/client/TextUserInterface/obj/Debug/netcoreapp5.0.0/TextUserInterface.pdb
 /home/jesper/code/fixshit/noWordChat/client/TextUserInterface/obj/Debug/netcoreapp5.0.0/TextUserInterface.genruntimeconfig.cache
+/home/jesper/code/fixshit/noWordChat/client/TextUserInterface/bin/Debug/netcoreapp5.0.0/Newtonsoft.Json.dll

@@ -11,8 +11,14 @@ namespace noWordChat
     {
 
         public List<String> oldMessagesList = new List<String>();
+
+        public bool ProcessKey(KeyEvent keyEvent)
+        {
+            return base.ProcessKey(keyEvent);
+        }
         static void Main()
         {
+            System.Diagnostics.Debug.WriteLine("This is a log");
             Application.Init();
             var top = Application.Top;
 
@@ -52,7 +58,7 @@ namespace noWordChat
             {
                 X = Pos.Right(inputMessage),
                 Y = Pos.AnchorEnd() - 1,
-                Width = Dim.Fill() - 10
+                Width = 10
             };
 
             win.Add(
@@ -62,29 +68,15 @@ namespace noWordChat
                 inputUsername
 
             );
-
-            oldMessagesList = getFirstOldMessages();
-            oldMessages.SetSource(oldMessagesList);
+            Program P = new Program();
+            chat c = new chat();
+            //P.getFirstOldMessages();
+            //c.oldMessagesList = P.getFirstOldMessages();
+            System.Diagnostics.Debug.WriteLine("This is a log");
+            System.Diagnostics.Debug.WriteLine(P.getFirstOldMessages());
+            oldMessages.SetSource(P.getFirstOldMessages());
 
             Application.Run();
-        }
-        public List<string> getFirstOldMessages()
-        {
-
-            WebClient cli = new WebClient();
-
-            string oldMessagesJson = cli.DownloadString("http://localhost:3000/chat/getFirst");
-            Messages oldMessages = JsonConvert.DeserializeObject<Messages>(oldMessagesJson);
-
-            for (int i = 0; i < oldMessages.messages.Length; i++)
-            {
-                DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(oldMessages.messages[i].time);
-
-                oldMessagesList.Add($"{dateTimeOffset: oldMessages.messages[i].username}: {oldMessages.messages[i].messageText}");
-            }
-
-
-            return oldMessagesList;
         }
         public string getMessagesFromServer()
         {
@@ -134,6 +126,32 @@ namespace noWordChat
         {
             public string username;
             public string messageText;
+        }
+        public class Program
+        {
+            public List<String> oldMessagesListTest = new List<String>();
+            public List<string> getFirstOldMessages()
+            {
+
+                WebClient cli = new WebClient();
+
+
+
+                string oldMessagesJson = cli.DownloadString("http://localhost:3000/chat/getFirst");
+                Messages oldMessages = JsonConvert.DeserializeObject<Messages>(oldMessagesJson);
+
+                for (int i = 0; i < oldMessages.messages.Length; i++)
+                {
+                    DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(oldMessages.messages[i].time);
+
+                    oldMessagesListTest.Add(oldMessages.messages[i].time + " " + oldMessages.messages[i].username + ": " + oldMessages.messages[i].messageText);
+                }
+
+                System.Console.WriteLine("Testing!");
+
+                return oldMessagesListTest;
+            }
+
         }
     }
 }
