@@ -1,113 +1,139 @@
 ﻿using Terminal.Gui;
 using System;
-using Mono.Terminal;
+using Newtonsoft.Json;
+using System.Net;
+using System.Collections.Generic;
 
-class Chat {
-	class Box10x : View {
-		public Box10x (int x, int y) : base (new Rect (x, y, 10, 10))
-		{
-		}
+namespace noWordChat
+{
 
-		public override void Redraw (Rect region)
-		{
-			Driver.SetAttribute (ColorScheme.Focus);
+    class chat
+    {
 
-			for (int y = 0; y < 10; y++) {
-				Move (0, y);
-				for (int x = 0; x < 10; x++) {
+        public List<String> oldMessagesList = new List<String>();
+        static void Main()
+        {
+            Application.Init();
+            var top = Application.Top;
 
-					Driver.AddRune ((Rune)('0' + (x + y) % 10));
-				}
-			}
+            // Creates the top-level window to show
+            var win = new Window("noWordChat")
+            {
+                X = 0,
+                Y = 0,
 
-		}
-	}
+                // Make a full window
+                Width = Dim.Fill(),
+                Height = Dim.Fill()
+            };
 
-	class Filler : View {
-		public Filler (Rect rect) : base (rect)
-		{
-		}
+            top.Add(win);
 
-		public override void Redraw (Rect region)
-		{
-			Driver.SetAttribute (ColorScheme.Focus);
-			var f = Frame;
+            // Shows old messages
+            var oldMessages = new ListView()
+            {
+                X = 0,
+                Y = 0,
+                Width = Dim.Fill(),
+                Height = Dim.Fill(),
+                AllowsMultipleSelection = false
+            };
 
-			for (int y = 0; y < f.Width; y++) {
-				Move (0, y);
-				for (int x = 0; x < f.Height; x++) {
-					Rune r;
-					switch (x % 3) {
-					case 0:
-						r = '.';
-						break;
-					case 1:
-						r = 'o';
-						break;
-					default:
-						r = 'O';
-						break;
-					}
-					Driver.AddRune (r);
-				}
-			}
-		}
-	}
+            // Message input field
+            var inputMessage = new TextField("")
+            {
+                X = 0,
+                Y = Pos.AnchorEnd() - 1,
+                Width = Dim.Fill() - 12
+            };
 
-	static void ShowEntries (View container)
-	{
+            // Username input field
+            var inputUsername = new TextField("")
+            {
+                X = Pos.Right(inputMessage),
+                Y = Pos.AnchorEnd() - 1,
+                Width = Dim.Fill() - 10
+            };
 
-		// Application.MainLoop.AddTimeout (TimeSpan.FromMilliseconds (300), timer);
-		var messageHistory = new ListView (new Rect (1, 6, 16, 4), new string [] {
-			"First Message",
-			"Next message",
-			"Third Message and some more text"
-		});
+            win.Add(
 
-		var chatMessage = new TextField ("") {
-			X = 0,
-			Y = Pos.AnchorEnd() -1,
-			Width = Dim.Fill(),
-			Height = 3
-		};
+                oldMessages,
+                inputMessage,
+                inputUsername
 
-		container.Add (
-			messageHistory,
-			chatMessage
-		);
+            );
 
-	}
+            oldMessagesList = getFirstOldMessages();
+            oldMessages.SetSource(oldMessagesList);
 
-	static bool Quit ()
-	{
-		var n = MessageBox.Query (50, 7, "Quit Chat", "Quit?", "Yes", "No");
-		return n == 0;
-	}
-	static void Main ()
-	{
-		//Application.UseSystemConsole = true;
-		Application.Init ();
+            Application.Run();
+        }
+        public List<string> getFirstOldMessages()
+        {
 
-		var top = Application.Top;
-		var tframe = top.Frame;
+            WebClient cli = new WebClient();
 
-		var win = new Window ("NoWordChat"){
-			X = 0,
-			Y = 1,
-			Width = Dim.Fill (),
-			Height = Dim.Fill () - 1
-		};					
-		var menu = new MenuBar (new MenuBarItem [] {
-			new MenuBarItem ("_Chat", new MenuItem [] {
-				new MenuItem ("_Quit", "", () => { if (Quit ()) top.Running = false; })
-			})
-		});
+            string oldMessagesJson = cli.DownloadString("http://localhost:3000/chat/getFirst");
+            Messages oldMessages = JsonConvert.DeserializeObject<Messages>(oldMessagesJson);
 
-		ShowEntries (win);
+            for (int i = 0; i < oldMessages.messages.Length; i++)
+            {
+                DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(oldMessages.messages[i].time);
+
+                oldMessagesList.Add($"{dateTimeOffset: oldMessages.messages[i].username}: {oldMessages.messages[i].messageText}");
+            }
 
 
-		top.Add (win, menu);
-		top.Add (menu);
-		Application.Run ();
-	}
+            return oldMessagesList;
+        }
+        public string getMessagesFromServer()
+        {
+            WebClient cli = new WebClient();
+
+            string oldMessagesJson = cli.DownloadString("http://localhost:3000/chat/getFirst");
+            Messages oldMessages = JsonConvert.DeserializeObject<Messages>(oldMessagesJson);
+
+
+            return "haha yes";
+        }
+        public void uploadToServer(string userMessage, string username)
+        {
+            WebClient cli = new WebClient();
+
+            // Convert before upload
+            Message message = new Message();
+            message.messageText = userMessage;
+            message.username = username;
+            string jsonSend = JsonConvert.SerializeObject(message);
+
+            // Send message to server
+            cli.Headers[HttpRequestHeader.ContentType] = "application/json";
+            try
+            {
+                cli.UploadString(new Uri("http://localhost:3000/chat/post"), "POST", jsonSend);
+            }
+            catch (WebException e)
+            {
+
+                throw e;
+            }
+
+        }
+        public class Message
+        {
+            public string username;
+            public string messageText;
+            public long time;
+        }
+        public class Messages
+        {
+            public Message[] messages;
+        }
+        // Only used for testing/example
+        public class UserMessage
+        {
+            public string username;
+            public string messageText;
+        }
+    }
 }
