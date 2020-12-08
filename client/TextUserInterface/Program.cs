@@ -19,7 +19,6 @@ namespace noWordChat
 
             P.uploadToServer();
         }
-
         static void Main()
         {
             System.Diagnostics.Debug.WriteLine("This is a log");
