@@ -2,11 +2,15 @@ var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser')
 var fs = require('fs');
-var chat = require('./chat.json');
+const { json } = require('body-parser');
 
 // Use bodyParser for POST requests
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
+
+// Restore saved chat log
+let chat = JSON.parse(fs.readFileSync('./chat.json'));
+console.log(chat);
 
 // Receive POST request from client
 router.post('/post', function (req, res) {

@@ -12,10 +12,12 @@ namespace noWordChat
 
         public List<String> oldMessagesList = new List<String>();
 
+        /*
         public bool ProcessKey(KeyEvent keyEvent)
         {
             return base.ProcessKey(keyEvent);
         }
+        */
         static void Main()
         {
             System.Diagnostics.Debug.WriteLine("This is a log");
