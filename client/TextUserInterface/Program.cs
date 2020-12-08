@@ -17,7 +17,7 @@ namespace noWordChat
             Program P = new Program();
             chat c = new chat();
 
-            P.uploadToServer();
+            //P.uploadToServer();
         }
         static void Main()
         {
@@ -123,9 +123,9 @@ namespace noWordChat
 
                 for (int i = 0; i < oldMessages.messages.Length; i++)
                 {
-                    DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(oldMessages.messages[i].time);
+                    DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeMilliseconds(oldMessages.messages[i].time);
 
-                    oldMessagesListTest.Add(oldMessages.messages[i].time + " " + oldMessages.messages[i].username + ": " + oldMessages.messages[i].messageText);
+                    oldMessagesListTest.Add(dateTimeOffset + " " + oldMessages.messages[i].username + ": " + oldMessages.messages[i].messageText);
                 }
 
                 System.Console.WriteLine("Testing!");
