@@ -12,10 +12,14 @@ namespace noWordChat
 
         public List<String> oldMessagesList = new List<String>();
 
-        public bool ProcessKey(KeyEvent keyEvent)
+        public void KeyEvent(Key Enter)
         {
-            return base.ProcessKey(keyEvent);
+            Program P = new Program();
+            chat c = new chat();
+
+            P.uploadToServer();
         }
+
         static void Main()
         {
             System.Diagnostics.Debug.WriteLine("This is a log");
@@ -88,29 +92,7 @@ namespace noWordChat
 
             return "haha yes";
         }
-        public void uploadToServer(string userMessage, string username)
-        {
-            WebClient cli = new WebClient();
 
-            // Convert before upload
-            Message message = new Message();
-            message.messageText = userMessage;
-            message.username = username;
-            string jsonSend = JsonConvert.SerializeObject(message);
-
-            // Send message to server
-            cli.Headers[HttpRequestHeader.ContentType] = "application/json";
-            try
-            {
-                cli.UploadString(new Uri("http://localhost:3000/chat/post"), "POST", jsonSend);
-            }
-            catch (WebException e)
-            {
-
-                throw e;
-            }
-
-        }
         public class Message
         {
             public string username;
@@ -152,6 +134,29 @@ namespace noWordChat
                 return oldMessagesListTest;
             }
 
+            public void uploadToServer(string userMessage, string username)
+            {
+                WebClient cli = new WebClient();
+
+                // Convert before upload
+                Message message = new Message();
+                message.messageText = userMessage;
+                message.username = username;
+                string jsonSend = JsonConvert.SerializeObject(message);
+
+                // Send message to server
+                cli.Headers[HttpRequestHeader.ContentType] = "application/json";
+                try
+                {
+                    cli.UploadString(new Uri("http://localhost:3000/chat/post"), "POST", jsonSend);
+                }
+                catch (WebException e)
+                {
+
+                    throw e;
+                }
+
+            }
         }
     }
 }
