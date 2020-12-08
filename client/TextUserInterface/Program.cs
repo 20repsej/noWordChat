@@ -132,7 +132,39 @@ namespace noWordChat
 
                 return oldMessagesListTest;
             }
+            public List<string> getMessages()
+            {
 
+                WebClient cli = new WebClient();
+
+                // Send message to server
+                cli.Headers[HttpRequestHeader.ContentType] = "application/json";
+                try
+                {
+                    cli.UploadString(new Uri("http://localhost:3000/chat/get"), "POST", "Testing! Testing!");
+                }
+                catch (WebException e)
+                {
+
+                    throw e;
+                }
+
+
+                /*
+                string oldMessagesJson = cli.DownloadString("http://localhost:3000/chat/getFirst");
+                Messages oldMessages = JsonConvert.DeserializeObject<Messages>(oldMessagesJson);
+
+                for (int i = 0; i < oldMessages.messages.Length; i++)
+                {
+                    DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeMilliseconds(oldMessages.messages[i].time);
+
+                    oldMessagesListTest.Add(dateTimeOffset + " " + oldMessages.messages[i].username + ": " + oldMessages.messages[i].messageText);
+                }
+
+                System.Console.WriteLine("Testing!");
+                */
+                return oldMessagesListTest;
+            }
             public void uploadToServer(string userMessage, string username)
             {
                 WebClient cli = new WebClient();
