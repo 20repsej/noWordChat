@@ -34,17 +34,18 @@ router.post('/post', function (req, res) {
     console.log(newChatFile);
 
     try {
-        fs.writeFile("./chat.json", newChatFile, (err) => {
-            if (err) throw err;
-        
-            console.log("The file was succesfully saved!");
-        });
+        fs.writeFile("./chat.json", newChatFile);
     } catch (e) {
         console.log("Could not save file: " + e);
     }
 
 
     res.end(); // let the client move on with life
+});
+
+// Receive POST request from client
+router.post('/get', function (req, res) {
+    res.send(req.body); // let the client move on with life
 });
 
 // Send old messages to client
@@ -64,19 +65,6 @@ router.get('/getFirst', function (req, res, next) {
     console.log(tosend);
     res.send(tosend);
 });
-
-router.get('/set', function (req, res, next) {
-    let username = req.query.username;
-    let messageText = req.query.messageText;
-
-    let message = JSON.parse(username, messageText);
-
-    chat.messages.push(message);
-
-    res.render('index', { title: 'Get Chat' });
-});
-
-
 
 function isNotWord(message) {
     let messageArr = message.split(/[ ]+/);
