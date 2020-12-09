@@ -45,6 +45,26 @@ router.post('/post', function (req, res) {
 
 // Receive POST request from client
 router.post('/get', function (req, res) {
+
+    let untilTime = req.body;
+
+    let messagesToSend;
+    if (chat.messages.length < 10) {
+        messagesToSend = 0;
+    }
+    else {
+        messagesToSend = chat.messages.length - 10;
+    }
+
+    let tenLast = chat.messages.slice(messagesToSend);
+    let messages = { messages: tenLast };
+    let tosend = JSON.stringify(messages);
+
+    console.log(tosend);
+    res.send(tosend);
+
+
+
     res.send(req.body); // let the client move on with life
 });
 
@@ -54,12 +74,12 @@ router.get('/getFirst', function (req, res, next) {
     if (chat.messages.length < 10) {
         messagesToSend = 0;
     }
-    else{
+    else {
         messagesToSend = chat.messages.length - 10;
     }
 
     let tenLast = chat.messages.slice(messagesToSend);
-    let messages = {messages:tenLast};
+    let messages = { messages: tenLast };
     let tosend = JSON.stringify(messages);
 
     console.log(tosend);

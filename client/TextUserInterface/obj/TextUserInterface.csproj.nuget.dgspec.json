@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Admin\\Documents\\GitHub\\noWordChat\\client\\TextUserInterface\\TextUserInterface.csproj": {}
+    "/home/jesper/code/fixshit/noWordChat/client/TextUserInterface/TextUserInterface.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Admin\\Documents\\GitHub\\noWordChat\\client\\TextUserInterface\\TextUserInterface.csproj": {
+    "/home/jesper/code/fixshit/noWordChat/client/TextUserInterface/TextUserInterface.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\Documents\\GitHub\\noWordChat\\client\\TextUserInterface\\TextUserInterface.csproj",
+        "projectUniqueName": "/home/jesper/code/fixshit/noWordChat/client/TextUserInterface/TextUserInterface.csproj",
         "projectName": "TextUserInterface",
-        "projectPath": "C:\\Users\\Admin\\Documents\\GitHub\\noWordChat\\client\\TextUserInterface\\TextUserInterface.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\Documents\\GitHub\\noWordChat\\client\\TextUserInterface\\obj\\",
+        "projectPath": "/home/jesper/code/fixshit/noWordChat/client/TextUserInterface/TextUserInterface.csproj",
+        "packagesPath": "/home/jesper/.nuget/packages/",
+        "outputPath": "/home/jesper/code/fixshit/noWordChat/client/TextUserInterface/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/home/jesper/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp5.0.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -59,12 +57,18 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[5.0.0, 5.0.0]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.101/RuntimeIdentifierGraph.json"
         }
       }
     }

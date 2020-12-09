@@ -141,18 +141,15 @@ namespace noWordChat
                 cli.Headers[HttpRequestHeader.ContentType] = "application/json";
                 try
                 {
-                    cli.UploadString(new Uri("http://localhost:3000/chat/get"), "POST", "Testing! Testing!");
+                    int testTime = 1606918451284;
+                    string answer = cli.UploadString(new Uri("http://localhost:3000/chat/get"), "POST", "testTime");
+                    Messages oldMessages = JsonConvert.DeserializeObject<Messages>(answer);
                 }
                 catch (WebException e)
                 {
 
                     throw e;
                 }
-
-
-                /*
-                string oldMessagesJson = cli.DownloadString("http://localhost:3000/chat/getFirst");
-                Messages oldMessages = JsonConvert.DeserializeObject<Messages>(oldMessagesJson);
 
                 for (int i = 0; i < oldMessages.messages.Length; i++)
                 {
@@ -162,7 +159,6 @@ namespace noWordChat
                 }
 
                 System.Console.WriteLine("Testing!");
-                */
                 return oldMessagesListTest;
             }
             public void uploadToServer(string userMessage, string username)
