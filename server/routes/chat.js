@@ -34,7 +34,7 @@ router.post('/post', function (req, res) {
     console.log(newChatFile);
 
     try {
-        fs.writeFile("./chat.json", newChatFile);
+        fs.writeFile("./chat.json", newChatFile, () => {});
     } catch (e) {
         console.log("Could not save file: " + e);
     }
