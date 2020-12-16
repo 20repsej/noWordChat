@@ -152,7 +152,7 @@ namespace noWordChat
         {
           System.Console.WriteLine("Start");
           int sak = 111111;
-          string answer = cli.UploadString(new Uri("http://localhost:3000/chat/get"), "POST", sak);
+          string answer = cli.UploadString(new Uri("http://localhost:3000/chat/get"), "POST", sak.ToString());
           Messages oldMessages = JsonConvert.DeserializeObject<Messages>(answer);
 
           for (int i = 0; i < oldMessages.messages.Length; i++)
