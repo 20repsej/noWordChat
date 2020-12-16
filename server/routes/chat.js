@@ -48,21 +48,6 @@ router.post('/get', function (req, res) {
 
     let fromTime = req.body;
 
-    let messagesToSend;
-    if (chat.messages.length < 10) {
-        messagesToSend = 0;
-    }
-    else {
-        messagesToSend = chat.messages.length - 10;
-    }
-
-    let tenLast = chat.messages.slice(messagesToSend);
-    let messages = { messages: tenLast };
-    let tosend = JSON.stringify(messages);
-
-    console.log(tosend);
-    res.send(tosend);
-
 
     res.send(JSON.stringify(chat)); // let the client move on with life
 });
