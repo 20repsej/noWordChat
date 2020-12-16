@@ -12,9 +12,8 @@ router.use(bodyParser.json());
 let chat = JSON.parse(fs.readFileSync('./chat.json'));
 console.log(chat);
 
-// Receive POST request from client
+// Receive POST request with new message from client
 router.post('/post', function (req, res) {
-
 
     // expected format: { username: '20repsej', messageText: 'This is my message' }
     let message = req.body;
@@ -23,16 +22,16 @@ router.post('/post', function (req, res) {
     console.log("Username: " + message.username);
     console.log("Message text: " + message.messageText);
 
-    // Adds time to message
+    // Add time to message
     let time = Date.now();
     message.time = time;
 
+    // Save new chatlog as text file
     console.log(chat.messages);
     chat.messages.push(message);
     console.log(chat);
     newChatFile = JSON.stringify(chat);
     console.log(newChatFile);
-
     try {
         fs.writeFile("./chat.json", newChatFile, () => {});
     } catch (e) {
@@ -44,12 +43,21 @@ router.post('/post', function (req, res) {
 });
 
 // Receive POST request from client
+// Returns all messages recieved after the specified time
 router.post('/get', function (req, res) {
 
+    // Expected format: milliseconds since 1970
     let fromTime = req.body;
 
-    console.log(chat);
-    res.send(JSON.stringify(chat)); // let the client move on with life
+    // Filter messages
+    let response = { messages: []}
+    chat.messages.forEach(message => {
+        if (message.time > fromTime) {
+            response.messages.push(message);
+        }
+    });
+    console.log(response);
+    res.send(JSON.stringify(response));
 });
 
 // Send old messages to client
