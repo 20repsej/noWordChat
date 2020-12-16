@@ -48,7 +48,7 @@ router.post('/get', function (req, res) {
 
     let fromTime = req.body;
 
-
+    console.log(chat);
     res.send(JSON.stringify(chat)); // let the client move on with life
 });
 

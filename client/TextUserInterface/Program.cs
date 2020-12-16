@@ -149,6 +149,7 @@ namespace noWordChat
         cli.Headers[HttpRequestHeader.ContentType] = "application/json";
         try
         {
+          System.Console.WriteLine("Start");
           string answer = cli.UploadString(new Uri("http://localhost:3000/chat/get"), "POST", "testTime");
           Messages oldMessages = JsonConvert.DeserializeObject<Messages>(answer);
 
