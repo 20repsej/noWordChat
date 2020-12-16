@@ -56,7 +56,7 @@ router.post('/get', function (req, res) {
             response.messages.push(message);
         }
     });
-
+    console.log(response);
     res.send(JSON.stringify(response));
 });
 

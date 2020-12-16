@@ -83,7 +83,8 @@ namespace noWordChat
       Application.MainLoop.AddTimeout(TimeSpan.FromSeconds(10), x =>
       {
         Program P = new Program();
-        P.getMessages();
+        //P.getMessages();
+        oldMessages.SetSource(P.getMessages());
         win.SetNeedsDisplay();
         return true;
       });
@@ -149,7 +150,9 @@ namespace noWordChat
         cli.Headers[HttpRequestHeader.ContentType] = "application/json";
         try
         {
-          string answer = cli.UploadString(new Uri("http://localhost:3000/chat/get"), "POST", "testTime");
+          System.Console.WriteLine("Start");
+          int sak = 111111;
+          string answer = cli.UploadString(new Uri("http://localhost:3000/chat/get"), "POST", sak);
           Messages oldMessages = JsonConvert.DeserializeObject<Messages>(answer);
 
           for (int i = 0; i < oldMessages.messages.Length; i++)
