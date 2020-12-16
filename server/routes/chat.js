@@ -60,12 +60,8 @@ router.post('/get', function (req, res) {
     let messages = { messages: tenLast };
     let tosend = JSON.stringify(messages);
 
-    console.log(tosend);
-    res.send(tosend);
-
-
-
-    res.send(req.body); // let the client move on with life
+    console.log(untilTime);
+    res.send(untilTime);
 });
 
 // Send old messages to client
