@@ -83,7 +83,7 @@ namespace noWordChat
       Application.MainLoop.AddTimeout(TimeSpan.FromSeconds(10), x =>
       {
         Program P = new Program();
-        P.getFirstOldMessages();
+        P.getMessages();
         win.SetNeedsDisplay();
         return true;
       });
@@ -162,9 +162,10 @@ namespace noWordChat
           System.Console.WriteLine("Testing!");
           return oldMessagesListTest;
         }
-        catch (WebException e)
+        catch (System.Exception)
         {
-          throw e;
+          return oldMessagesListTest;
+          throw;
         }
       }
       public void uploadToServer(string userMessage, string username)
