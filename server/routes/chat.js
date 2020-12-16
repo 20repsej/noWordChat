@@ -46,7 +46,7 @@ router.post('/post', function (req, res) {
 // Receive POST request from client
 router.post('/get', function (req, res) {
 
-    let untilTime = req.body;
+    let fromTime = req.body;
 
     let messagesToSend;
     if (chat.messages.length < 10) {
@@ -64,8 +64,7 @@ router.post('/get', function (req, res) {
     res.send(tosend);
 
 
-
-    res.send(req.body); // let the client move on with life
+    res.send(JSON.stringify(chat)); // let the client move on with life
 });
 
 // Send old messages to client
