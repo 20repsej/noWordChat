@@ -1,14 +1,1 @@
-{
-    "messages": [
-        {
-            "username": "Shoulder",
-            "messageText": "hej hopp jättesn...",
-            "time": 1284
-        },
-        {
-            "username": "jesper6",
-            "messageText": "meddelande",
-            "time": 1606918451284
-        }
-    ]
-}
+{"messages":[{"username":"Shoulder","messageText":"hej hopp jättesn...","time":1284},{"username":"jesper6","messageText":"meddelande","time":1606918451284},{"username":"","messageText":"dfsdf","time":1608128240428}]}
