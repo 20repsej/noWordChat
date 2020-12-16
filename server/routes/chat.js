@@ -50,7 +50,7 @@ router.post('/get', function (req, res) {
     let fromTime = req.body;
 
     // Filter messages
-    let response = { messages: []}
+    let response = { messages: []};
     chat.messages.forEach(message => {
         if (message.time > fromTime) {
             response.messages.push(message);
@@ -59,6 +59,10 @@ router.post('/get', function (req, res) {
 
     res.send(JSON.stringify(response));
 });
+
+
+
+
 
 // Send old messages to client
 router.get('/getFirst', function (req, res, next) {
