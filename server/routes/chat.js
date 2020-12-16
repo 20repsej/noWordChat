@@ -46,22 +46,10 @@ router.post('/post', function (req, res) {
 // Receive POST request from client
 router.post('/get', function (req, res) {
 
-    let untilTime = req.body;
+    let fromTime = req.body;
 
-    let messagesToSend;
-    if (chat.messages.length < 10) {
-        messagesToSend = 0;
-    }
-    else {
-        messagesToSend = chat.messages.length - 10;
-    }
 
-    let tenLast = chat.messages.slice(messagesToSend);
-    let messages = { messages: tenLast };
-    let tosend = JSON.stringify(messages);
-
-    console.log(untilTime);
-    res.send(untilTime);
+    res.send(JSON.stringify(chat)); // let the client move on with life
 });
 
 // Send old messages to client
