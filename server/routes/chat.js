@@ -61,12 +61,12 @@ router.post('/get', function (req, res) {
 
     // Expected format: milliseconds since 1970
     let fromTime = req.body;
-    console.log("fromtime: " + fromTime);
+    console.log("fromtime: " + fromTime.time);
 
     // Filter messages
     let response = { messages: []};
     chat.messages.forEach(message => {
-        if (message.time > fromTime) {
+        if (message.time > fromTime.time) {
             console.log("including this: " + message);
             response.messages.push(message);
         } else {
