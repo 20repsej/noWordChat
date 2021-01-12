@@ -10,8 +10,18 @@ router.use(bodyParser.json());
 
 // Restore saved chat log
 let chat = JSON.parse(fs.readFileSync('./chat.json'));
-console.log("Starting... \nThis is the saved chat log:")
+console.log("Starting... \nThis is the saved chat log:");
 console.log(chat);
+
+// Prepare dictionary
+console.log("Starting to read dictionary...");
+const wordsString = fs.readFileSync('./words.txt').toString().toLowerCase();
+console.log("Splitting dictionary into words...");
+const wordArray = wordsString.split('\n');
+
+console.log('Filtering "sandwich"');
+console.log(filterWords('sandwich'));
+
 
 // Receive POST request with new message from client
 router.post('/post', function (req, res) {
@@ -26,6 +36,9 @@ router.post('/post', function (req, res) {
     // Add time to message
     let time = Date.now();
     message.time = time;
+
+    // Remove words from message text
+    message.messageText = filterWords(message.messageText);
 
     // Save new chatlog as json text file
     console.log(chat.messages);
@@ -63,6 +76,26 @@ router.post('/get', function (req, res) {
     console.log(response);
     res.send(JSON.stringify(response));
 });
+
+function filterWords(str) {
+    strippedString = str.replace(/\s+/g, '').toLowerCase();
+    let wasIllegal = false;
+    wordArray.forEach(
+        function (word) {
+            if (strippedString.includes(word)) {
+                strippedString = strippedString.replace(word, ' ');
+                wasIllegal = true;
+                console.log(word + " was removed!");
+            }
+        }
+    );
+    if (wasIllegal) {
+        return strippedString;
+    } else {
+        return str;
+    }
+}
+
 
 
 
