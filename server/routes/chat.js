@@ -48,7 +48,7 @@ router.post('/get', function (req, res) {
 
     // Expected format: milliseconds since 1970
     let fromTime = req.body;
-
+    console.log(fromTime);
     // Filter messages
     let response = { messages: []};
     chat.messages.forEach(message => {
