@@ -10,6 +10,7 @@ router.use(bodyParser.json());
 
 // Restore saved chat log
 let chat = JSON.parse(fs.readFileSync('./chat.json'));
+console.log("Starting... \nThis is the saved chat log:")
 console.log(chat);
 
 // Receive POST request with new message from client
@@ -26,7 +27,7 @@ router.post('/post', function (req, res) {
     let time = Date.now();
     message.time = time;
 
-    // Save new chatlog as text file
+    // Save new chatlog as json text file
     console.log(chat.messages);
     chat.messages.push(message);
     console.log(chat);
@@ -38,7 +39,6 @@ router.post('/post', function (req, res) {
         console.log("Could not save file: " + e);
     }
 
-
     res.end(); // let the client move on with life
 });
 
@@ -48,12 +48,16 @@ router.post('/get', function (req, res) {
 
     // Expected format: milliseconds since 1970
     let fromTime = req.body;
-    console.log(fromTime);
+    console.log("fromtime: " + fromTime);
+
     // Filter messages
     let response = { messages: []};
     chat.messages.forEach(message => {
         if (message.time > fromTime) {
+            console.log("including this: " + message);
             response.messages.push(message);
+        } else {
+            console.log("excluded this: " + message);
         }
     });
     console.log(response);
@@ -64,7 +68,7 @@ router.post('/get', function (req, res) {
 
 
 
-// Send old messages to client
+// Send old messages to client - DEPRICATED, USE /GET INSTEAD
 router.get('/getFirst', function (req, res, next) {
     let messagesToSend;
     if (chat.messages.length < 10) {
