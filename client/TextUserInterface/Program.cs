@@ -62,19 +62,16 @@ namespace noWordChat
                 Width = Dim.Fill()
             };
 
+            var inputUsername = new TextField(""){
+                Width = 10
+            };
+            
             // Message input field
             var inputMessage = new TextField("")
             {
-                Width = Dim.Fill() - 10
+                Width = Dim.Fill(),
+                X = Pos.Right(inputUsername) + 2
             };
-
-            // Username input field
-            var inputUsername = new TextField("")
-            {
-                X = Pos.Right(inputMessage),
-                Width = 10
-            };
-
             inputWin.Enter_Pressed += () =>
                   {
                       P.uploadToServer(inputMessage.Text.ToString(), inputUsername.Text.ToString());
@@ -107,7 +104,7 @@ namespace noWordChat
             });
 
             
-
+            inputUsername.Text = "Guest";
             Application.Run();
         }
 
@@ -146,7 +143,7 @@ namespace noWordChat
                 {
                     string time = @"{""time"":""" + inTime + @"""}";
                     //System.Console.WriteLine(time);
-                    string answer = cli.UploadString(new Uri("http://localhost:3000/chat/get"), "POST", time);
+                    string answer = cli.UploadString(new Uri("http://81.237.183.102:3000/chat/get"), "POST", time);
                     Messages oldMessages = JsonConvert.DeserializeObject<Messages>(answer);
 
                     for (int i = 0; i < oldMessages.messages.Length; i++)
@@ -179,7 +176,7 @@ namespace noWordChat
                 cli.Headers[HttpRequestHeader.ContentType] = "application/json";
                 try
                 {
-                    cli.UploadString(new Uri("http://localhost:3000/chat/post"), "POST", jsonSend);
+                    cli.UploadString(new Uri("http://81.237.183.102:3000/chat/post"), "POST", jsonSend);
                 }
                 catch (WebException e)
                 {
