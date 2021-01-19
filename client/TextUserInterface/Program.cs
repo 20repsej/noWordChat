@@ -146,7 +146,6 @@ namespace noWordChat
                 catch (System.Exception)
                 {
                     return c.oldMessagesList;
-                    Console.WriteLine("ERROR");
                     throw;
                 }
             }
