@@ -39,11 +39,13 @@ namespace noWordChat
                 Y = 0,
                 Width = Dim.Fill(),
                 Height = Dim.Fill(),
+                
                 AllowsMultipleSelection = false
             };
 
 
             List<String> chatWindowMessages = P.getMessages(0);
+            chatWindowMessages.Reverse();
 
             oldMessages.SetSource(chatWindowMessages);
 
@@ -75,7 +77,6 @@ namespace noWordChat
 
             inputWin.Enter_Pressed += () =>
                   {
-                      Program P = new Program();
                       P.uploadToServer(inputMessage.Text.ToString(), inputUsername.Text.ToString());
                       inputMessage.Text = "";
                       win.SetNeedsDisplay();
@@ -98,7 +99,9 @@ namespace noWordChat
             int secondsPerRefresh = 5;
             Application.MainLoop.AddTimeout(TimeSpan.FromSeconds(secondsPerRefresh), x =>
             {
-                chatWindowMessages.AddRange(P.getMessages(DateTimeOffset.Now.ToUnixTimeMilliseconds() - secondsPerRefresh * 1000));
+                List<String> newMessages = P.getMessages(DateTimeOffset.Now.ToUnixTimeMilliseconds() - secondsPerRefresh * 1000);
+                newMessages.Reverse();
+                chatWindowMessages.InsertRange(0, newMessages);
                 win.SetNeedsDisplay();
                 return true;
             });
@@ -130,6 +133,7 @@ namespace noWordChat
 
             public List<string> getMessages(long inTime)
             {
+            
 
                 chat c = new chat();
 
@@ -147,7 +151,8 @@ namespace noWordChat
 
                     for (int i = 0; i < oldMessages.messages.Length; i++)
                     {
-                        DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeMilliseconds(oldMessages.messages[i].time);
+                        // gets message time and converts it to local timezone
+                        DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeMilliseconds(oldMessages.messages[i].time + long.Parse(TimeZoneInfo.Local.GetUtcOffset(DateTime.UtcNow).TotalMilliseconds.ToString()) );
 
                         c.oldMessagesList.Add(dateTimeOffset + " " + oldMessages.messages[i].username + ": " + oldMessages.messages[i].messageText);
                     }
