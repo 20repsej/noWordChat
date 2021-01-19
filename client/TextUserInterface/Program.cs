@@ -13,9 +13,11 @@ namespace noWordChat
         public List<String> oldMessagesList = new List<String>();
         static void Main()
         {
-            System.Diagnostics.Debug.WriteLine("This is a log");
-            Application.Init();
-            var top = Application.Top;
+
+            Program P = new Program();
+            chat c = new chat();
+
+            
 
             // Creates the top-level window to show
             var win = new Window("noWordChat")
@@ -28,7 +30,7 @@ namespace noWordChat
                 Height = Dim.Fill()
             };
 
-            top.Add(win);
+            
 
             // Shows old messages
             var oldMessages = new ListView()
@@ -39,6 +41,17 @@ namespace noWordChat
                 Height = Dim.Fill(),
                 AllowsMultipleSelection = false
             };
+
+
+            List<String> chatWindowMessages = P.getMessages(0);
+
+            oldMessages.SetSource(chatWindowMessages);
+
+
+            System.Diagnostics.Debug.WriteLine("This is a log");
+            Application.Init();
+            var top = Application.Top;
+            top.Add(win);
 
             var inputWin = new SearchWindow()
             {
@@ -79,20 +92,18 @@ namespace noWordChat
                 inputWin
 
             );
-
-            Application.MainLoop.AddTimeout(TimeSpan.FromSeconds(10), x =>
+            
+            
+            // Main loop of the app - refreshes message window
+            int secondsPerRefresh = 5;
+            Application.MainLoop.AddTimeout(TimeSpan.FromSeconds(secondsPerRefresh), x =>
             {
-                Program P = new Program();
-          //P.getMessages();
-          oldMessages.SetSource(P.getMessages(0));
+                chatWindowMessages.AddRange(P.getMessages(DateTimeOffset.Now.ToUnixTimeMilliseconds() - secondsPerRefresh * 1000));
                 win.SetNeedsDisplay();
                 return true;
             });
 
-            Program P = new Program();
-            chat c = new chat();
-
-            oldMessages.SetSource(P.getMessages(0));
+            
 
             Application.Run();
         }
@@ -117,7 +128,7 @@ namespace noWordChat
         {
             public List<String> oldMessagesListTest = new List<String>();
 
-            public List<string> getMessages(int inTime)
+            public List<string> getMessages(long inTime)
             {
 
                 chat c = new chat();
