@@ -97,27 +97,4 @@ function filterWords(str) {
 }
 
 
-
-
-
-
-// Send old messages to client - DEPRICATED, USE /GET INSTEAD
-router.get('/getFirst', function (req, res, next) {
-    let messagesToSend;
-    if (chat.messages.length < 10) {
-        messagesToSend = 0;
-    }
-    else {
-        messagesToSend = chat.messages.length - 10;
-    }
-
-    let tenLast = chat.messages.slice(messagesToSend);
-    let messages = { messages: tenLast };
-    let tosend = JSON.stringify(messages);
-
-    console.log(tosend);
-    res.send(tosend);
-});
-
-
 module.exports = router;

@@ -1,13 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "bjImjbCR388Am1dsoDycI9HTjv/PYoor4XIvl52u+XBkT+LDmBY8EpFRlR71+ZDQ7wi3JTYVu0bRyEJ7yKDU1g==",
+  "dgSpecHash": "n1tuQr8L/akj3/Onm87YE7UA31AO4iXAeyR0oATFpS+ZtxSv/QleHaV4rPOlQei/n4e4L8gJN2KzwPvBcKEgTA==",
   "success": true,
-  "projectFilePath": "/home/jesper/code/noWordChat/client/TextUserInterface/TextUserInterface.csproj",
+  "projectFilePath": "C:\\Users\\Admin\\Desktop\\Code\\noWordChat\\client\\TextUserInterface\\TextUserInterface.csproj",
   "expectedPackageFiles": [
-    "/home/jesper/.nuget/packages/newtonsoft.json/12.0.3/newtonsoft.json.12.0.3.nupkg.sha512",
-    "/home/jesper/.nuget/packages/nstack.core/0.14.0/nstack.core.0.14.0.nupkg.sha512",
-    "/home/jesper/.nuget/packages/terminal.gui/0.81.0/terminal.gui.0.81.0.nupkg.sha512",
-    "/home/jesper/.nuget/packages/microsoft.aspnetcore.app.ref/5.0.0/microsoft.aspnetcore.app.ref.5.0.0.nupkg.sha512"
+    "C:\\Users\\Admin\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\nstack.core\\0.14.0\\nstack.core.0.14.0.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\terminal.gui\\0.81.0\\terminal.gui.0.81.0.nupkg.sha512"
   ],
   "logs": []
 }
