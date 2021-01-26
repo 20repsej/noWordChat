@@ -17,8 +17,17 @@ console.log(chat);
 console.log("Starting to read dictionary...");
 const wordsString = fs.readFileSync('./words.txt').toString().toLowerCase();
 console.log("Splitting dictionary into words...");
-const wordArray = wordsString.split('\n');
+wordArray = wordsString.split('\r\n');
 
+// Remove words with symbols and other shit - yes this code is ugly af but so is js
+wordArray = wordArray.filter(word => ( word.length > 2 && !word.match(/[|\\/~^:,;?!&%$@*+]/) && !word.match(/[|\\0123456789]/) && !word.match(/[|\\.]/)));
+
+// Sort array by length
+wordArray.sort(function(a, b){
+    return b.length - a.length;
+  });
+
+// Filter sandwich for debugging
 console.log('Filtering "sandwich"');
 console.log(filterWords('sandwich'));
 
@@ -41,11 +50,11 @@ router.post('/post', function (req, res) {
     message.messageText = filterWords(message.messageText);
 
     // Save new chatlog as json text file
-    console.log(chat.messages);
+    //console.log(chat.messages);
     chat.messages.push(message);
-    console.log(chat);
+    //console.log(chat);
     newChatFile = JSON.stringify(chat);
-    console.log(newChatFile);
+    //console.log(newChatFile);
     try {
         fs.writeFile("./chat.json", newChatFile, () => {});
     } catch (e) {
@@ -67,13 +76,13 @@ router.post('/get', function (req, res) {
     let response = { messages: []};
     chat.messages.forEach(message => {
         if (message.time > fromTime.time) {
-            console.log("including this: " + message);
+            //console.log("including this: " + message);
             response.messages.push(message);
         } else {
-            console.log("excluded this: " + message);
+            //console.log("excluded this: " + message);
         }
     });
-    console.log(response);
+    //console.log(response);
     res.send(JSON.stringify(response));
 });
 
@@ -83,12 +92,13 @@ function filterWords(str) {
     wordArray.forEach(
         function (word) {
             if (strippedString.includes(word)) {
-                strippedString = strippedString.replace(word, ' ');
+                strippedString = strippedString.replace(word, '*');
                 wasIllegal = true;
                 console.log(word + " was removed!");
             }
         }
     );
+    console.log("-" + strippedString + "-")
     if (wasIllegal) {
         return strippedString;
     } else {
