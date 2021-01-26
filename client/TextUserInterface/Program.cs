@@ -169,7 +169,7 @@ namespace noWordChat
                 {
                     string time = @"{""time"":""" + inTime + @"""}";
                     //System.Console.WriteLine(time);
-                    string answer = cli.UploadString(new Uri("http://localhost:3000/chat/get"), "POST", time);
+                    string answer = cli.UploadString(new Uri("http://81.237.183.102:3000/chat/get"), "POST", time);
                     Messages oldMessages = JsonConvert.DeserializeObject<Messages>(answer);
 
                     for (int i = 0; i < oldMessages.messages.Length; i++)
@@ -202,7 +202,7 @@ namespace noWordChat
                 cli.Headers[HttpRequestHeader.ContentType] = "application/json";
                 try
                 {
-                    cli.UploadString(new Uri("http://localhost:3000/chat/post"), "POST", jsonSend);
+                    cli.UploadString(new Uri("http://81.237.183.102:3000/chat/post"), "POST", jsonSend);
                 }
                 catch (WebException e)
                 {
