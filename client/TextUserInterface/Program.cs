@@ -5,11 +5,8 @@ using System.Net;
 using System.Collections.Generic;
 
 namespace noWordChat
-{
-
-    class chat
+{    class chat
     {
-
         public List<String> oldMessagesList = new List<String>();
         static void Main()
         {
