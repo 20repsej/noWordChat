@@ -5,8 +5,10 @@ using System.Net;
 using System.Collections.Generic;
 
 namespace noWordChat
-{    class chat
+{
+    class chat
     {
+        public string serverIp = "http://localhost:3000";
         public List<String> oldMessagesList = new List<String>();
         static void Main()
         {
@@ -166,7 +168,7 @@ namespace noWordChat
                 {
                     string time = @"{""time"":""" + inTime + @"""}";
                     //System.Console.WriteLine(time);
-                    string answer = cli.UploadString(new Uri("http://81.237.183.102:3000/chat/get"), "POST", time);
+                    string answer = cli.UploadString(new Uri(c.serverIp + "/chat/get"), "POST", time);
                     Messages oldMessages = JsonConvert.DeserializeObject<Messages>(answer);
 
                     for (int i = 0; i < oldMessages.messages.Length; i++)
@@ -189,6 +191,7 @@ namespace noWordChat
             {
                 WebClient cli = new WebClient();
 
+                chat c = new chat();
                 // Convert before upload
                 Message message = new Message();
                 message.messageText = userMessage;
@@ -199,7 +202,7 @@ namespace noWordChat
                 cli.Headers[HttpRequestHeader.ContentType] = "application/json";
                 try
                 {
-                    cli.UploadString(new Uri("http://81.237.183.102:3000/chat/post"), "POST", jsonSend);
+                    cli.UploadString(new Uri(c.serverIp + "/chat/post"), "POST", jsonSend);
                 }
                 catch (WebException e)
                 {
