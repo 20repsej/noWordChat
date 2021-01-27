@@ -136,22 +136,20 @@ namespace noWordChat
             Application.Run();
         }
 
+        // One message
         public class Message
         {
             public string username;
             public string messageText;
             public long time;
         }
+
+        // All the messages
         public class Messages
         {
             public Message[] messages;
         }
-        // Only used for testing/example
-        public class UserMessage
-        {
-            public string username;
-            public string messageText;
-        }
+
         public class Program
         {
             public List<String> oldMessagesListTest = new List<String>();
@@ -190,8 +188,11 @@ namespace noWordChat
                     throw;
                 }
             }
+
+            // Uploads message to server
             public void uploadToServer(string userMessage, string username)
             {
+                
                 WebClient cli = new WebClient();
 
                 chat c = new chat();
