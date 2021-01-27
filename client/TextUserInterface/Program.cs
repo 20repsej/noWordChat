@@ -8,6 +8,8 @@ namespace noWordChat
 {
     class chat
     {
+
+        // Insert server ip here
         public string serverIp = "http://localhost:3000";
         public List<String> oldMessagesList = new List<String>();
         static void Main()
@@ -99,6 +101,7 @@ namespace noWordChat
             bool colorChange = false;
             Application.MainLoop.AddTimeout(TimeSpan.FromSeconds(secondsPerRefresh), x =>
             {
+                // Change color of inputWin every 5s because reason.
                 if (colorChange)
                 {
                     inputWin.ColorScheme = new ColorScheme()
