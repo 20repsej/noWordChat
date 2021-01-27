@@ -5,8 +5,10 @@ using System.Net;
 using System.Collections.Generic;
 
 namespace noWordChat
-{    class chat
+{
+    class chat
     {
+        public string serverIp = "http://localhost:3000";
         public List<String> oldMessagesList = new List<String>();
         static void Main()
         {
@@ -14,7 +16,7 @@ namespace noWordChat
             Program P = new Program();
             chat c = new chat();
 
-            
+
 
             // Creates the top-level window to show
             var win = new Window("noWordChat")
@@ -27,7 +29,7 @@ namespace noWordChat
                 Height = Dim.Fill()
             };
 
-            
+
 
             // Shows old messages
             var oldMessages = new ListView()
@@ -36,8 +38,10 @@ namespace noWordChat
                 Y = 0,
                 Width = Dim.Fill(),
                 Height = Dim.Fill(),
-                
-                AllowsMultipleSelection = false
+
+                AllowsMultipleSelection = false,
+
+
             };
 
 
@@ -59,10 +63,11 @@ namespace noWordChat
                 Width = Dim.Fill()
             };
 
-            var inputUsername = new TextField(""){
+            var inputUsername = new TextField("")
+            {
                 Width = 10
             };
-            
+
             // Message input field
             var inputMessage = new TextField("")
             {
@@ -87,12 +92,35 @@ namespace noWordChat
                 inputWin
 
             );
-            
-            
+
+
             // Main loop of the app - refreshes message window
             int secondsPerRefresh = 5;
+            bool colorChange = false;
             Application.MainLoop.AddTimeout(TimeSpan.FromSeconds(secondsPerRefresh), x =>
             {
+                if (colorChange)
+                {
+                    inputWin.ColorScheme = new ColorScheme()
+                    {
+                        Focus = Terminal.Gui.Attribute.Make(Color.BrightGreen, Color.DarkGray),
+                        Normal = Terminal.Gui.Attribute.Make(Color.Green, Color.BrightYellow),
+                        HotFocus = Terminal.Gui.Attribute.Make(Color.BrightBlue, Color.Brown),
+                        HotNormal = Terminal.Gui.Attribute.Make(Color.Red, Color.BrightRed),
+                    };
+                    colorChange = false;
+                }
+                else
+                {
+                    inputWin.ColorScheme = new ColorScheme()
+                    {
+                        Focus = Terminal.Gui.Attribute.Make(Color.BrightGreen, Color.Red),
+                        Normal = Terminal.Gui.Attribute.Make(Color.Blue, Color.BrightGreen),
+                        HotFocus = Terminal.Gui.Attribute.Make(Color.BrighCyan, Color.DarkGray),
+                        HotNormal = Terminal.Gui.Attribute.Make(Color.Red, Color.BrightRed),
+                    };
+                    colorChange = true;
+                }
                 List<String> newMessages = P.getMessages(DateTimeOffset.Now.ToUnixTimeMilliseconds() - secondsPerRefresh * 1000);
                 newMessages.Reverse();
                 chatWindowMessages.InsertRange(0, newMessages);
@@ -100,7 +128,7 @@ namespace noWordChat
                 return true;
             });
 
-            
+
             inputUsername.Text = "Guest";
             Application.Run();
         }
@@ -127,7 +155,7 @@ namespace noWordChat
 
             public List<string> getMessages(long inTime)
             {
-            
+
 
                 chat c = new chat();
 
@@ -140,13 +168,13 @@ namespace noWordChat
                 {
                     string time = @"{""time"":""" + inTime + @"""}";
                     //System.Console.WriteLine(time);
-                    string answer = cli.UploadString(new Uri("http://81.237.183.102:3000/chat/get"), "POST", time);
+                    string answer = cli.UploadString(new Uri(c.serverIp + "/chat/get"), "POST", time);
                     Messages oldMessages = JsonConvert.DeserializeObject<Messages>(answer);
 
                     for (int i = 0; i < oldMessages.messages.Length; i++)
                     {
                         // gets message time and converts it to local timezone
-                        DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeMilliseconds(oldMessages.messages[i].time + long.Parse(TimeZoneInfo.Local.GetUtcOffset(DateTime.UtcNow).TotalMilliseconds.ToString()) );
+                        DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeMilliseconds(oldMessages.messages[i].time + long.Parse(TimeZoneInfo.Local.GetUtcOffset(DateTime.UtcNow).TotalMilliseconds.ToString()));
 
                         c.oldMessagesList.Add(dateTimeOffset + " " + oldMessages.messages[i].username + ": " + oldMessages.messages[i].messageText);
                     }
@@ -163,6 +191,7 @@ namespace noWordChat
             {
                 WebClient cli = new WebClient();
 
+                chat c = new chat();
                 // Convert before upload
                 Message message = new Message();
                 message.messageText = userMessage;
@@ -173,7 +202,7 @@ namespace noWordChat
                 cli.Headers[HttpRequestHeader.ContentType] = "application/json";
                 try
                 {
-                    cli.UploadString(new Uri("http://81.237.183.102:3000/chat/post"), "POST", jsonSend);
+                    cli.UploadString(new Uri(c.serverIp + "/chat/post"), "POST", jsonSend);
                 }
                 catch (WebException e)
                 {
