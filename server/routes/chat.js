@@ -10,7 +10,7 @@ router.use(bodyParser.json());
 
 // Restore saved chat log
 let chat = JSON.parse(fs.readFileSync('./chat.json'));
-console.log("Starting... \nThis is the saved chat log:");
+console.log("\nThis is the saved chat log:");
 console.log(chat);
 
 // Prepare dictionary
@@ -19,7 +19,7 @@ const wordsString = fs.readFileSync('./words.txt').toString().toLowerCase();
 console.log("Splitting dictionary into words...");
 wordArray = wordsString.split('\r\n');
 
-// Remove words with symbols and other shit - yes this code is ugly af but so is js
+// Remove words with symbols and other shit - yes this code is ugly but i could not group all charachters 
 wordArray = wordArray.filter(word => ( word.length > 2 && !word.match(/[|\\/~^:,;?!&%$@*+]/) && !word.match(/[|\\0123456789]/) && !word.match(/[|\\.]/)));
 
 // Sort array by length
@@ -86,6 +86,7 @@ router.post('/get', function (req, res) {
     res.send(JSON.stringify(response));
 });
 
+// Checks if a string makes sense. If it does, unmakesenseit.
 function filterWords(str) {
     strippedString = str.replace(/\s+/g, '').toLowerCase();
     let wasIllegal = false;
@@ -98,8 +99,8 @@ function filterWords(str) {
             }
         }
     );
-    console.log("-" + strippedString + "-")
     if (wasIllegal) {
+        console.log('"' + str + '" was an illegal word. It got replaced with: "' + strippedString + '"');
         return strippedString;
     } else {
         return str;
