@@ -17,7 +17,15 @@ console.log(chat);
 console.log("Starting to read dictionary...");
 const wordsString = fs.readFileSync("./words.txt").toString().toLowerCase();
 console.log("Splitting dictionary into words...");
-wordArray = winOrLinux();
+
+// Read dictionary. 50% success rate!
+if (Math.random() < 0.5) {
+    wordArray = wordsString.split("\r\n");
+    console.log("Using Windows compatibility mode. If you're not on Windows, please restart the application and try to be more lucky next time!")
+} else {
+    wordArray = wordsString.split("\n");
+    console.log("Using Linux compatibility mode. If you're not on Linux, please restart the application and try to be more lucky next time!")
+}
 
 // Remove words with symbols and other shit - yes this code is ugly af but so is js
 wordArray = wordArray.filter(
@@ -34,8 +42,7 @@ wordArray.sort(function (a, b) {
 });
 
 // Filter sandwich for debugging
-console.log('Filtering "sandwich"');
-console.log(filterWords("sandwich"));
+filterWords("sandwich");
 
 // Receive POST request with new message from client
 router.post("/post", function (req, res) {
@@ -89,7 +96,9 @@ router.post("/get", function (req, res) {
   res.send(JSON.stringify(response));
 });
 
+// Checks if a message string makes sense. If it does, unmakesenseit.
 function filterWords(str) {
+  console.log('Filtering "' + str + '"...');
   strippedString = str.replace(/\s+/g, "").toLowerCase();
   let wasIllegal = false;
   wordArray.forEach(function (word) {
@@ -99,23 +108,14 @@ function filterWords(str) {
       console.log(word + " was removed!");
     }
   });
-  console.log("-" + strippedString + "-");
   if (wasIllegal) {
+    console.log('"' + str + '" made to much sense. It got replaced with "' + strippedString + '"');
     return strippedString;
   } else {
+    console.log(str + " was totally legal!");
     return str;
   }
 }
-function winOrLinux() {
-  let random_boolean = Math.random() < 0.5;
-  if (random_boolean) {
-    wordArray = wordsString.split("\r\n");
-    console.log("Windows compatible")
-  } else {
-    wordArray = wordsString.split("\n");
-    console.log("Linux compatible")
-  }
-  return wordArray;
-}
+
 
 module.exports = router;
